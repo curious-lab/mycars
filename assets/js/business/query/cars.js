@@ -4,9 +4,17 @@
  */
 $(document).ready(function () {
     let cars = get_the_location_and_day();
+    sort_by_price_pipe(cars);
+    cars = filter_by_transimission_pipe(cars)
+    cars = filter_by_fuelpipe(cars);
+    cars = filter_by_style_pipe(cars)
     displayAllCars(cars);
+
     car_set_select_locations();
-    set_sbp_option_from_storage()
+    set_sbp_option_from_storage();
+    set_fbt_option_from_storage();
+    set_fbf_option_from_storage();
+    set_fbs_option_from_storage();
 });
 
 /**
@@ -290,8 +298,49 @@ function car_on_loc_and_date_reselect() {
 function onSortByPrice(id) {
     console.log("sot by price method id ", id)
     localStorage['sbp_method_id'] = id;
-    let cars = get_the_location_and_day();
-    clear_all_cars();
+    location.reload();
+}
+
+
+function set_sbp_option_from_storage() {
+    let id = localStorage['sbp_method_id']
+    document.getElementById(id).className = "nav-link active"
+}
+
+function set_fbt_option_from_storage() {
+    let id = localStorage['fbt_method_id']
+    document.getElementById(id).className = "nav-link active"
+}
+function set_fbf_option_from_storage() {
+    let id = localStorage['fbf_method_id']
+    document.getElementById(id).className = "nav-link active"
+}
+
+function set_fbs_option_from_storage() {
+    let id = localStorage['fbs_method_id']
+    document.getElementById(id).className = "nav-link active"
+}
+
+function onFilterByTransmission(id){
+    console.log("filer by trnsimssion method id ", id)
+    localStorage['fbt_method_id'] = id;
+    location.reload()
+}
+
+function onFilterByFuel(id){
+    console.log("filer by Fuel method id ", id)
+    localStorage['fbf_method_id'] = id;
+    location.reload()
+}
+
+function onFilterByStyle(id){
+    console.log("filer by style method id ", id)
+    localStorage['fbs_method_id'] = id;
+    location.reload()
+}
+
+function sort_by_price_pipe(cars){
+    let id = localStorage['sbp_method_id'] ;
     if (id == "sbp_lowhigh") {
         //sort low to high
         cars.sort((car_a,car_b)=>{
@@ -301,7 +350,7 @@ function onSortByPrice(id) {
                 return -1;
             }
         })
-    } else {
+    } else if(id == "sbp_highlow"){
         //sort high to low
         //sort low to high
         cars.sort((car_a,car_b)=>{
@@ -312,11 +361,88 @@ function onSortByPrice(id) {
             }
         })
     }
-    displayAllCars(cars);
 }
 
-function set_sbp_option_from_storage() {
-    let id = localStorage['sbp_method_id']
-    document.getElementById(id).className = "nav-link active"
+function filter_by_transimission_pipe(cars){
+    let id = localStorage['fbt_method_id'] ;
+    let fl_cars = []
+    if(id == "fbt_manual"){
+        cars.forEach((car)=>{
+            if(car.transmission.toLowerCase().replace(/\s/g, "")=="manual"){
+                fl_cars.push(car) 
+            }
+        })
+        return JSON.parse(JSON.stringify(fl_cars))
+
+    }else if(id== "fbt_auto"){
+        cars.forEach((car)=>{
+            if(car.transmission.toLowerCase().replace(/\s/g, "")=="automatic"){
+                fl_cars.push(car) 
+            }
+        })
+        return JSON.parse(JSON.stringify(fl_cars))
+    }else{
+        return cars;
+    }
+}
+
+function filter_by_fuelpipe(cars){
+    let id = localStorage['fbf_method_id'] ;
+    let fl_cars = []
+    if(id == "fbf_petrol"){
+        cars.forEach((car)=>{
+            if(car.fuel_Type.toLowerCase().replace(/\s/g, "")=="petrol"){
+                fl_cars.push(car) 
+            }
+        })
+        return JSON.parse(JSON.stringify(fl_cars))
+
+    }else if(id== "fbf_diesel"){
+        cars.forEach((car)=>{
+            if(car.fuel_Type.toLowerCase().replace(/\s/g, "")=="diesel"){
+                fl_cars.push(car) 
+            }
+        })
+        return JSON.parse(JSON.stringify(fl_cars))
+    }else{
+        return cars;
+    }
+}
+
+function filter_by_style_pipe(cars){
+    let id = localStorage['fbs_method_id'] ;
+    let fl_cars = []
+    if(id == "fbs_hatch"){
+        cars.forEach((car)=>{
+            if(car.car_Type.toLowerCase().replace(/\s/g, "")=="hatchback"){
+                fl_cars.push(car) 
+            }
+        })
+        return JSON.parse(JSON.stringify(fl_cars))
+
+    }else if(id== "fbs_sedan"){
+        cars.forEach((car)=>{
+            if(car.car_Type.toLowerCase().replace(/\s/g, "")=="sedan"){
+                fl_cars.push(car) 
+            }
+        })
+        return JSON.parse(JSON.stringify(fl_cars))
+    }else if(id== "fbs_suv"){
+        cars.forEach((car)=>{
+            if(car.car_Type.toLowerCase().replace(/\s/g, "")=="suv"){
+                fl_cars.push(car) 
+            }
+        })
+        return JSON.parse(JSON.stringify(fl_cars))
+    }else if(id== "fbs_mini_suv"){
+        cars.forEach((car)=>{
+            if(car.car_Type.toLowerCase().replace(/\s/g, "")=="minisuv"){
+                fl_cars.push(car) 
+            }
+        })
+        return JSON.parse(JSON.stringify(fl_cars))
+    }else{
+        return cars;
+    }
 }
 
