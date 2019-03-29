@@ -3,8 +3,10 @@
  * init home on the page load
  */
 $(document).ready(function () {
-    get_the_location_and_day();
+    let cars = get_the_location_and_day();
+    displayAllCars(cars);
     car_set_select_locations();
+    set_sbp_option_from_storage()
 });
 
 /**
@@ -42,7 +44,12 @@ function get_the_location_and_day() {
 
 
     //initially filter the cars according to the location
-    filter_cars_by_loc_and_day(str_location, frmt_day);
+    let cars = filter_cars_by_loc_and_day(str_location, frmt_day);
+    if (cars == null || cars == undefined) {
+        return null;
+    } else {
+        return cars;
+    }
 }
 
 
@@ -103,9 +110,28 @@ function filter_cars_by_loc_and_day(location, day) {
     console.log("unavailable cars ", unavailable_cars)
     console.log("All cars", all_cars)
 
-    all_cars.forEach(car => {
-        display_car(car)
-    });
+    return all_cars;
+}
+
+/**
+ * this method will display all the cars
+ * 
+ */
+function displayAllCars(cars) {
+    if (cars != null) {
+        cars.forEach(car => {
+            display_car(car)
+        });
+    }
+}
+
+//removed the cars child array form root
+function clear_all_cars() {
+    //get the root reference
+    let root_element = document.getElementById("cars_cars_list");
+    while (root_element.firstChild) {
+        root_element.removeChild(root_element.firstChild);
+    }
 }
 
 /**
@@ -132,7 +158,7 @@ function display_car(car) {
     sc_thumb_in.className = "car-list-thumb";
     let car_img = document.createElement('img');
     car_img.src = car.photo;
-    car_img.className="car-list-thumb";
+    car_img.className = "car-list-thumb";
     //car_img.style.height="auto"
     sc_thumb_in.appendChild(car_img);
     sc_thumb_out.appendChild(sc_thumb_in);
@@ -173,7 +199,7 @@ function display_car(car) {
     //locatioin
     var car_location = document.createElement('p');
     car_location.innerHTML = car.location;
-    car_location.style="float: right";
+    car_location.style = "float: right";
 
     //location marker
     var loc_marker = document.createElement('i');
@@ -192,7 +218,7 @@ function display_car(car) {
     cr_inf.appendChild(ul_misc)
     cr_inf.appendChild(car_location);
     //check if car available
-    if(car.is_available==false){
+    if (car.is_available == false) {
         cr_inf.appendChild(p_avl)
     }
     cr_inf_dis_tbl_cell.appendChild(cr_inf);
@@ -256,5 +282,41 @@ function car_on_loc_and_date_reselect() {
 
         location.reload();
     }
+}
+
+/**
+ * On sort by price option is changed
+ */
+function onSortByPrice(id) {
+    console.log("sot by price method id ", id)
+    localStorage['sbp_method_id'] = id;
+    let cars = get_the_location_and_day();
+    clear_all_cars();
+    if (id == "sbp_lowhigh") {
+        //sort low to high
+        cars.sort((car_a,car_b)=>{
+            if(car_a.price>car_b.price){
+                return 1;
+            }else{
+                return -1;
+            }
+        })
+    } else {
+        //sort high to low
+        //sort low to high
+        cars.sort((car_a,car_b)=>{
+            if(car_a.price>car_b.price){
+                return -1;
+            }else{
+                return 1;
+            }
+        })
+    }
+    displayAllCars(cars);
+}
+
+function set_sbp_option_from_storage() {
+    let id = localStorage['sbp_method_id']
+    document.getElementById(id).className = "nav-link active"
 }
 
