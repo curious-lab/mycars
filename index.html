@@ -21,7 +21,7 @@
     <!--=== Owl Carousel CSS ===-->
     <link href="assets/css/plugins/owl.carousel.min.css" rel="stylesheet">
     <!--=== Gijgo CSS ===-->
-    
+
     <!-- <link href="assets/css/plugins/gijgo.css" rel="stylesheet"> -->
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     <!--=== FontAwesome CSS ===-->
@@ -128,7 +128,6 @@
                             <div class="display-table-cell">
                                 <h1>BOOK A CAR TODAY!</h1>
                                 <p>DRIVE YOURSELF TO AN ADVENTURE</p>
-
                                 <div class="book-ur-car">
                                     <form id="home_submit_form">
                                         <div class="retern-date bookinput-item" style="visibility:hidden">
@@ -136,12 +135,8 @@
                                         </div>
 
                                         <div class="pick-location bookinput-item">
-                                            <select class="custom-select" id="home_location_select">
-                                                <!-- <option selected>Pick Location</option>
-                                                <option value="1">Koramangala</option>
-                                                <option value="2">HSR Layout</option>
-                                                <option value="3">Indiranagar</option> -->
-                                            </select>
+                                            <!-- Dynamically loaded thru home.js -->
+                                            <select class="custom-select" id="home_location_select"></select>
                                         </div>
 
                                         <div class=" bookinput-item">
@@ -162,6 +157,8 @@
                                         </div>
                                     </form>
                                 </div>
+                                <!-- Error display section-->
+                                <p id="home_submit_error_div" class="alert" style="color:yellow" role="alert" style="visibility:hidden"></p>
                             </div>
                         </div>
                     </div>
@@ -235,9 +232,13 @@
     <!--=== Data js===-->
     <script src="assets/js/business/data/sample_cars.js"></script>
     <script src="assets/js/business/data/sample_locations.js"></script>
+    <script src="assets/js/business/data/mc_week_days_def.js"></script>
 
     <!--=== Home related queries js===-->
     <script src="assets/js/business/query/home.js"></script>
+
+    <!-- Moment js for date manipulation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
 
 </body>
