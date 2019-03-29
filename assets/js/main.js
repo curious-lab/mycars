@@ -178,7 +178,7 @@
 
         // Home Page Two Date Picker JS
 
-        $('#startDate2').datepicker({
+        $('#home_startDate2').datepicker({
             uiLibrary: 'bootstrap4',
             iconsLibrary: 'fontawesome',
             minDate: today,
@@ -193,7 +193,7 @@
             iconsLibrary: 'fontawesome',
             size: 'small',
             minDate: function () {
-                return $('#startDate2').val();
+                return $('#home_startDate2').val();
             }
         });
 
