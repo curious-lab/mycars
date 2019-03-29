@@ -1,5 +1,13 @@
+
+/**
+ * function to get the car json
+ */
+function sc_get_cars(){
+    return cars;
+}
+
 //static car data
-export const cars = [
+const cars = [
     {
       "name": "Hyundai Grand i10",
       "photo": "https://jtride-data.s3.ap-south-1.amazonaws.com/uploads/1517236166_1509779915_152_i10.webp",

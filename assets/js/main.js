@@ -182,6 +182,7 @@
             uiLibrary: 'bootstrap4',
             iconsLibrary: 'fontawesome',
             minDate: today,
+            size: 'small',
             maxDate: function () {
                 return $('#endDate2').val();
             }
@@ -190,6 +191,7 @@
         $('#endDate2').datepicker({
             uiLibrary: 'bootstrap4',
             iconsLibrary: 'fontawesome',
+            size: 'small',
             minDate: function () {
                 return $('#startDate2').val();
             }

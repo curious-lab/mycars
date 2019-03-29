@@ -21,7 +21,9 @@
     <!--=== Owl Carousel CSS ===-->
     <link href="assets/css/plugins/owl.carousel.min.css" rel="stylesheet">
     <!--=== Gijgo CSS ===-->
-    <link href="assets/css/plugins/gijgo.css" rel="stylesheet">
+    
+    <!-- <link href="assets/css/plugins/gijgo.css" rel="stylesheet"> -->
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     <!--=== FontAwesome CSS ===-->
     <link href="assets/css/font-awesome.css" rel="stylesheet">
     <!--=== Theme Reset CSS ===-->
@@ -128,34 +130,34 @@
                                 <p>DRIVE YOURSELF TO AN ADVENTURE</p>
 
                                 <div class="book-ur-car">
-                                    <form action="index.html">
+                                    <form id="home_submit_form">
                                         <div class="retern-date bookinput-item" style="visibility:hidden">
                                             <input id="endDate2" placeholder="Return Date" />
                                         </div>
 
                                         <div class="pick-location bookinput-item">
-                                            <select class="custom-select">
-                                              <option selected>Pick Location</option>
-                                              <option value="1">Koramangala</option>
-                                              <option value="2">HSR Layout</option>
-                                              <option value="3">Indiranagar</option>
+                                            <select class="custom-select" id="home_location_select">
+                                                <option selected>Pick Location</option>
+                                                <option value="1">Koramangala</option>
+                                                <option value="2">HSR Layout</option>
+                                                <option value="3">Indiranagar</option>
                                             </select>
                                         </div>
 
-                                        <div class="pick-date bookinput-item">
+                                        <div class=" bookinput-item">
                                             <input id="startDate2" placeholder="Pick Date" />
                                         </div>
 
                                         <div class="bookcar-btn bookinput-item">
-                                            <button type="submit">Book Car</button>
+                                            <button type="button" onclick="home_on_submit()">Book Car</button>
                                         </div>
 
                                         <div class="car-choose bookinput-item" style="visibility:hidden">
                                             <select class="custom-select">
-                                              <option selected>Choose Car</option>
-                                              <option value="1">BMW</option>
-                                              <option value="2">Audi</option>
-                                              <option value="3">Lexus</option>
+                                                <option selected>Choose Car</option>
+                                                <option value="1">BMW</option>
+                                                <option value="2">Audi</option>
+                                                <option value="3">Lexus</option>
                                             </select>
                                         </div>
                                     </form>
@@ -179,7 +181,10 @@
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <p>
-                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Designed with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="http://curiouslabs.in/manoj" target="_blank">Manoj</a>
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved | Designed
+                            with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="http://curiouslabs.in/manoj"
+                                target="_blank">Manoj</a>
                         </p>
                     </div>
                 </div>
@@ -205,7 +210,8 @@
     <!--=== Bootstrap Min Js ===-->
     <script src="assets/js/bootstrap.min.js"></script>
     <!--=== Gijgo Min Js ===-->
-    <script src="assets/js/plugins/gijgo.js"></script>
+    <!-- <script src="assets/js/plugins/gijgo.js"></script> -->
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
     <!--=== Vegas Min Js ===-->
     <script src="assets/js/plugins/vegas.min.js"></script>
     <!--=== Isotope Min Js ===-->
@@ -225,6 +231,13 @@
 
     <!--=== Mian Js ===-->
     <script src="assets/js/main.js"></script>
+
+    <!--=== Data js===-->
+    <script src="assets/js/business/data/sample_cars.js"></script>
+
+    <!--=== Home related queries js===-->
+    <script src="assets/js/business/query/home.js"></script>
+
 
 </body>
 
