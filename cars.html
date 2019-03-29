@@ -21,7 +21,7 @@
     <!--=== Owl Carousel CSS ===-->
     <link href="assets/css/plugins/owl.carousel.min.css" rel="stylesheet">
     <!--=== Gijgo CSS ===-->
-    <link href="assets/css/plugins/gijgo.css" rel="stylesheet">
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     <!--=== FontAwesome CSS ===-->
     <link href="assets/css/font-awesome.css" rel="stylesheet">
     <!--=== Theme Reset CSS ===-->
@@ -255,29 +255,26 @@
                                 <form action="#">
                                     <!--== Pick Up Location ==-->
                                     <div class="pickup-location book-item">
-                                        <select class="custom-select" style="width: -webkit-fill-available;">
-                                            <option selected="">Select Location</option>
-                                            <option value="1">Koramangala</option>
-                                            <option value="2">HSR Layout</option>
-                                            <option value="3">Indiranagar</option>
+                                        <select class="custom-select" id="car_location_select" style="width: -webkit-fill-available;">
                                         </select>
                                     </div>
                                     <!--== Pick Up Location ==-->
 
                                     <!--== Pick Up Date ==-->
+                                    <!-- end date is hidden -->
+                                    <div class="retern-date bookinput-item" style="visibility:hidden">
+                                            <input id="car_endDate2" placeholder="Return Date" />
+                                    </div>
                                     <div class="pick-up-date book-item">
-                                        <div role="wrapper" class="gj-datepicker gj-datepicker-bootstrap gj-unselectable input-group"><input
-                                                id="startDate" placeholder="Pick Up Date" data-type="datepicker"
-                                                data-guid="d9f5be82-035d-83f5-0bef-e506d7c43fe8" data-datepicker="true"
-                                                class="form-control" role="input" month="2" year="2019"><span class="input-group-append"
-                                                role="right-icon"><span class="input-group-text"><i class="fa fa-calendar"
-                                                        aria-hidden="true"></i></span></span></div>
+                                        <input id="car_startDate2" placeholder="Pick Date" />
                                     </div>
                                     <!--== Pick Up Location ==-->
 
                                     <div class="book-button text-center">
-                                        <button class="book-now-btn" style="padding: 5px 30px;">Search</button>
+                                        <button class="book-now-btn" style="padding: 5px 30px;" onclick="car_on_loc_and_date_reselect()">Search</button>
                                     </div>
+                                     <!-- Error display section-->
+                                <p id="car_submit_error_div" class="alert" style="color:yellow" role="alert" style="visibility:hidden"></p>
                                 </form>
 
                             </div>
@@ -355,7 +352,7 @@
     <!--=== Bootstrap Min Js ===-->
     <script src="assets/js/bootstrap.min.js"></script>
     <!--=== Gijgo Min Js ===-->
-    <script src="assets/js/plugins/gijgo.js"></script>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
     <!--=== Vegas Min Js ===-->
     <script src="assets/js/plugins/vegas.min.js"></script>
     <!--=== Isotope Min Js ===-->
@@ -378,10 +375,14 @@
 
 
     <!--=== Data Js ===-->
-    <script src="assets/js/business//data/sample_cars.js"></script>
+    <script src="assets/js/business/data/sample_cars.js"></script>
+    <script src="assets/js/business/data/sample_locations.js"></script>
+    <script src="assets/js/business/data/mc_week_days_def.js"></script>
 
     <!--=== Cars related queries js===-->
     <script src="assets/js/business/query/cars.js"></script>
+    <!-- Moment js for date manipulation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
 </body>
 

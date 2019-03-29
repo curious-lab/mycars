@@ -197,6 +197,27 @@
             }
         });
 
+        //cat page date pcikers
+        
+        $('#car_startDate2').datepicker({
+            uiLibrary: 'bootstrap4',
+            iconsLibrary: 'fontawesome',
+            minDate: today,
+            size: 'small',
+            maxDate: function () {
+                return $('#car_endDate2').val();
+            }
+        });
+
+        $('#car_endDate2').datepicker({
+            uiLibrary: 'bootstrap4',
+            iconsLibrary: 'fontawesome',
+            size: 'small',
+            minDate: function () {
+                return $('#car_startDate2').val();
+            }
+        });
+
         // Home Page 3 Slider Start
         $("#home-slider-area").owlCarousel({
             loop: true,

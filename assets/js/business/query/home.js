@@ -44,6 +44,7 @@ function home_on_submit() {
         //navigate to cars page
         //set the location and day in local storage
         localStorage["home_selected_location"] = str_location;
+        localStorage["home_selected_location_index"] = el_location;
         localStorage["home_selected_day"] = frmt_day;
 
         window.location = "./cars.html";
