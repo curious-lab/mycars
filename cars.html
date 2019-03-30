@@ -36,7 +36,7 @@
         <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-</head>
+<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/76FD7CA2-86B7-4045-909D-4580577F6BF8/main.js" charset="UTF-8"></script></head>
 
 <body class="loader-active">
 
@@ -93,7 +93,7 @@
                 <div class="row">
                     <!--== Logo Start ==-->
                     <div class="col-lg-4">
-                        <a href="index2.html" class="logo">
+                        <a href="index.html" class="logo">
                             <img src="assets/img/logo.png" alt="JSOFT">
                         </a>
                     </div>
@@ -142,13 +142,13 @@
                 <div class="col-lg-4">
                     <div class="sidebar-content-wrap">
 
-                        <div class="newsletter-area" style="">
+                        <div class="newsletter-area" style="margin-bottom: 0px; margin-top: 0px;">
                             <form action="#">
                                 <input id="car_search_input" type="text" placeholder="Search" style="color:black">
                                 <button onclick="search_filter()" class="newsletter-btn"><i class="fa fa-search"></i></button>
                             </form>
-                            <!-- Error display section-->
-                            <p id="car_search_submit_error_div" class="alert" style="color:red" role="alert" style="visibility:hidden"></p>
+                             <!-- Error display section-->
+                             <p id="car_search_submit_error_div" class="alert" style="color:red" role="alert" style="visibility:hidden"></p>
                         </div>
 
 
@@ -160,21 +160,20 @@
                                 <div class="ourcar-tab-menu">
                                     <ul class="nav nav-tabs" id="ourcartabmenu" role="tablist">
                                         <li class="nav-item">
-                                            <a onclick="onFilterByStyle('fbs_hatch')" class="nav-link" id="fbs_hatch"
-                                                data-toggle="tab" href="#" role="tab" aria-selected="false">Hatchback</a>
+                                            <a onclick="onFilterByStyle('fbs_hatch')" class="nav-link" id="fbs_hatch" data-toggle="tab" href="#"
+                                                role="tab" aria-selected="false">Hatchback</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a onclick="onFilterByStyle('fbs_sedan')" class="nav-link" id="fbs_sedan"
-                                                data-toggle="tab" href="#" role="tab" aria-selected="false">Sedan</a>
+                                            <a onclick="onFilterByStyle('fbs_sedan')" class="nav-link" id="fbs_sedan" data-toggle="tab" href="#"
+                                                role="tab" aria-selected="false">Sedan</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a onclick="onFilterByStyle('fbs_suv')" class="nav-link" id="fbs_suv"
-                                                data-toggle="tab" href="#ourcar_3" role="tab" aria-selected="false">SUV</a>
+                                            <a onclick="onFilterByStyle('fbs_suv')" class="nav-link" id="fbs_suv" data-toggle="tab" href="#ourcar_3"
+                                                role="tab" aria-selected="false">SUV</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a onclick="onFilterByStyle('fbs_mini_suv')" class="nav-link" id="fbs_mini_suv"
-                                                data-toggle="tab" href="#ourcar_4" role="tab" aria-selected="false">Mini
-                                                SUV</a>
+                                            <a onclick="onFilterByStyle('fbs_mini_suv')" class="nav-link" id="fbs_mini_suv" data-toggle="tab" href="#ourcar_4"
+                                                role="tab" aria-selected="false">Mini SUV</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -191,12 +190,12 @@
                                 <div class="ourcar-tab-menu">
                                     <ul class="nav nav-tabs" id="ourcartabmenu" role="tablist">
                                         <li class="nav-item">
-                                            <a onclick="onFilterByFuel('fbf_petrol')" class="nav-link" id="fbf_petrol"
-                                                data-toggle="tab" href="#" role="tab" aria-selected="false">Petrol</a>
+                                            <a onclick="onFilterByFuel('fbf_petrol')" class="nav-link" id="fbf_petrol" data-toggle="tab" href="#"
+                                                role="tab" aria-selected="false">Petrol</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a onclick="onFilterByFuel('fbf_diesel')" class="nav-link" id="fbf_diesel"
-                                                data-toggle="tab" href="#" role="tab" aria-selected="false">Diesel</a>
+                                            <a onclick="onFilterByFuel('fbf_diesel')" class="nav-link" id="fbf_diesel" data-toggle="tab" href="#"
+                                                role="tab" aria-selected="false">Diesel</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -213,12 +212,12 @@
                                 <div class="ourcar-tab-menu">
                                     <ul class="nav nav-tabs" id="ourcartabmenu" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link" onclick="onFilterByTransmission('fbt_manual')" id="fbt_manual"
-                                                data-toggle="tab" href="#" role="tab" aria-selected="false">Manual</a>
+                                            <a class="nav-link" onclick="onFilterByTransmission('fbt_manual')"  id="fbt_manual" data-toggle="tab" href="#"
+                                                role="tab" aria-selected="false">Manual</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" onclick="onFilterByTransmission('fbt_auto')" id="fbt_auto"
-                                                data-toggle="tab" href="#" role="tab" aria-selected="false">Automatic</a>
+                                            <a class="nav-link" onclick="onFilterByTransmission('fbt_auto')" id="fbt_auto" data-toggle="tab" href="#"
+                                                role="tab" aria-selected="false">Automatic</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -235,12 +234,12 @@
                                 <div class="ourcar-tab-menu">
                                     <ul class="nav nav-tabs" id="ourcartabmenu" role="tablist">
                                         <li class="nav-item">
-                                            <a onclick="onSortByPrice('sbp_highlow')" class="nav-link" id="sbp_highlow"
-                                                data-toggle="tab" href="#" role="tab" aria-selected="false">High ~ Low</a>
+                                            <a onclick="onSortByPrice('sbp_highlow')" class="nav-link" id="sbp_highlow" data-toggle="tab" href="#"
+                                                role="tab" aria-selected="false">High ~ Low</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a onclick="onSortByPrice('sbp_lowhigh')" class="nav-link" id="sbp_lowhigh"
-                                                data-toggle="tab" href="#" role="tab" aria-selected="false">Low ~ High</a>
+                                            <a onclick="onSortByPrice('sbp_lowhigh')" class="nav-link" id="sbp_lowhigh" data-toggle="tab" href="#"
+                                                role="tab" aria-selected="false">Low ~ High</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -264,8 +263,8 @@
 
                                     <!--== Pick Up Date ==-->
                                     <!-- end date is hidden -->
-                                    <div class="retern-date bookinput-item" style="visibility:hidden">
-                                        <input id="car_endDate2" placeholder="Return Date" />
+                                    <div class="retern-date bookinput-item" style="display:none">
+                                            <input id="car_endDate2" placeholder="Return Date" />
                                     </div>
                                     <div class="pick-up-date book-item">
                                         <input id="car_startDate2" placeholder="Pick Date" />
@@ -275,8 +274,8 @@
                                     <div class="book-button text-center">
                                         <button class="book-now-btn" style="padding: 5px 30px;" onclick="car_on_loc_and_date_reselect()">Search</button>
                                     </div>
-                                    <!-- Error display section-->
-                                    <p id="car_submit_error_div" class="alert" style="color:red" role="alert" style="visibility:hidden;margin-bottom: 0px;"></p>
+                                     <!-- Error display section-->
+                                <p id="car_submit_error_div" class="alert" style="color:red" role="alert" style="visibility:hidden;     margin-bottom: 0px;"></p>
                                 </form>
 
                             </div>
@@ -286,18 +285,18 @@
 
 
                         <div class="single-sidebar">
-                            <div class="sidebar-body">
-                                <div class="ourcar-tab-menu">
-                                    <ul class="nav nav-tabs" id="ourcartabmenu">
-                                        <li class="nav-item">
-                                            <a onclick="clear_all_filter()" class="nav-link" href="#" aria-selected="false">CLEAR
-                                                ALL FILTER</a>
-                                        </li>
-                                    </ul>
+                                <div class="sidebar-body">
+                                    <div class="ourcar-tab-menu">
+                                        <ul class="nav nav-tabs" id="ourcartabmenu">
+                                            <li class="nav-item">
+                                                <a onclick="clear_all_filter()" class="nav-link"  href="#"
+                                                   aria-selected="false">CLEAR ALL FILTER</a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
+    
                             </div>
-
-                        </div>
 
                     </div>
                 </div>
