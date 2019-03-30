@@ -633,3 +633,40 @@ function on_pagination_element_click(page_number, maxpage) {
     location.reload()
 }
 
+
+
+/**********************Clear al filters***********************/
+function clear_all_filter(){
+    clear_sbp_option_from_storage()
+    clear_fbt_option_from_storage()
+    clear_fbf_option_from_storage()
+    clear_fbs_option_from_storage()
+    clear_search_query_from_storage()
+    location.reload()
+}
+
+function clear_sbp_option_from_storage() {
+    localStorage['sbp_method_id']=""
+}
+
+function clear_fbt_option_from_storage() {
+     localStorage['fbt_method_id']=""
+}
+function clear_fbf_option_from_storage() {
+    localStorage['fbf_method_id']=""
+
+}
+
+function clear_fbs_option_from_storage() {
+    localStorage['fbs_method_id']=""
+}
+
+function clear_search_query_from_storage() {
+    localStorage['car_search_input']=""
+}
+/**************************************************************/
+
+
+
+
+
