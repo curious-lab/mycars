@@ -72,31 +72,35 @@ function home_set_select_locations() {
 $(document).ready(function () {
     home_set_select_locations();
     //clear all cache
-    set_sbp_option_from_storage()
-    set_fbt_option_from_storage()
-    set_fbf_option_from_storage()
-    set_fbs_option_from_storage()
-    set_search_query_from_storage()
+    clear_last_page_number_from_storage()
+    clear_sbp_option_from_storage()
+    clear_fbt_option_from_storage()
+    clear_fbf_option_from_storage()
+    clear_fbs_option_from_storage()
+    clear_search_query_from_storage()
 });
 
 
-function set_sbp_option_from_storage() {
+function clear_sbp_option_from_storage() {
     localStorage['sbp_method_id']=""
 }
 
-function set_fbt_option_from_storage() {
+function clear_fbt_option_from_storage() {
      localStorage['fbt_method_id']=""
 }
-function set_fbf_option_from_storage() {
+function clear_fbf_option_from_storage() {
     localStorage['fbf_method_id']=""
 
 }
 
-function set_fbs_option_from_storage() {
+function clear_fbs_option_from_storage() {
     localStorage['fbs_method_id']=""
 }
 
-function set_search_query_from_storage() {
+function clear_search_query_from_storage() {
     localStorage['car_search_input']=""
- 
+}
+
+function clear_last_page_number_from_storage() {
+    localStorage['last_page_number']="";
 }

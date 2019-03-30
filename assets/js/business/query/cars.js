@@ -11,6 +11,7 @@ $(document).ready(function () {
     cars = filter_by_fuelpipe(cars);
     cars = filter_by_style_pipe(cars)
     cars = searchFilterPipe(cars)
+    cars = create_pagination(cars)
     displayAllCars(cars);
 
     car_set_select_locations();
@@ -62,9 +63,6 @@ function get_the_location_and_day() {
         return cars;
     }
 }
-
-
-
 
 /**
  * This function will filter the cars by location and the day
@@ -307,191 +305,331 @@ function onSortByPrice(id) {
 
 function set_sbp_option_from_storage() {
     let id = localStorage['sbp_method_id']
-    if(id !=""){
+    if (id != "") {
         document.getElementById(id).className = "nav-link active"
     }
 }
 
 function set_fbt_option_from_storage() {
     let id = localStorage['fbt_method_id']
-    if(id != ""){
+    if (id != "") {
         document.getElementById(id).className = "nav-link active"
     }
 }
 function set_fbf_option_from_storage() {
     let id = localStorage['fbf_method_id']
-    if(id != ""){
+    if (id != "") {
         document.getElementById(id).className = "nav-link active"
     }
 }
 
 function set_fbs_option_from_storage() {
     let id = localStorage['fbs_method_id']
-    if(id != ""){
+    if (id != "") {
         document.getElementById(id).className = "nav-link active"
     }
 }
 
 function set_search_query_from_storage() {
     let query = localStorage['car_search_input']
-    if(query != undefined && query !=null && query != "" && query!="undefined"){
+    if (query != undefined && query != null && query != "" && query != "undefined") {
         document.getElementById('car_search_input').value = query
     }
 }
 
-function onFilterByTransmission(id){
+function set_last_page_number_to_storage(page) {
+    localStorage['last_page_number'] = page
+}
+
+function onFilterByTransmission(id) {
     console.log("filer by trnsimssion method id ", id)
     localStorage['fbt_method_id'] = id;
     location.reload()
 }
 
-function onFilterByFuel(id){
+function onFilterByFuel(id) {
     console.log("filer by Fuel method id ", id)
     localStorage['fbf_method_id'] = id;
     location.reload()
 }
 
-function onFilterByStyle(id){
+function onFilterByStyle(id) {
     console.log("filer by style method id ", id)
     localStorage['fbs_method_id'] = id;
     location.reload()
 }
 
-function sort_by_price_pipe(cars){
-    let id = localStorage['sbp_method_id'] ;
+function sort_by_price_pipe(cars) {
+    let id = localStorage['sbp_method_id'];
     if (id == "sbp_lowhigh") {
         //sort low to high
-        cars.sort((car_a,car_b)=>{
-            if(car_a.price>car_b.price){
+        cars.sort((car_a, car_b) => {
+            if (car_a.price > car_b.price) {
                 return 1;
-            }else{
+            } else {
                 return -1;
             }
         })
-    } else if(id == "sbp_highlow"){
+    } else if (id == "sbp_highlow") {
         //sort high to low
         //sort low to high
-        cars.sort((car_a,car_b)=>{
-            if(car_a.price>car_b.price){
+        cars.sort((car_a, car_b) => {
+            if (car_a.price > car_b.price) {
                 return -1;
-            }else{
+            } else {
                 return 1;
             }
         })
     }
 }
 
-function filter_by_transimission_pipe(cars){
-    let id = localStorage['fbt_method_id'] ;
+function filter_by_transimission_pipe(cars) {
+    let id = localStorage['fbt_method_id'];
     let fl_cars = []
-    if(id == "fbt_manual"){
-        cars.forEach((car)=>{
-            if(car.transmission.toLowerCase().replace(/\s/g, "")=="manual"){
-                fl_cars.push(car) 
+    if (id == "fbt_manual") {
+        cars.forEach((car) => {
+            if (car.transmission.toLowerCase().replace(/\s/g, "") == "manual") {
+                fl_cars.push(car)
             }
         })
         return JSON.parse(JSON.stringify(fl_cars))
 
-    }else if(id== "fbt_auto"){
-        cars.forEach((car)=>{
-            if(car.transmission.toLowerCase().replace(/\s/g, "")=="automatic"){
-                fl_cars.push(car) 
+    } else if (id == "fbt_auto") {
+        cars.forEach((car) => {
+            if (car.transmission.toLowerCase().replace(/\s/g, "") == "automatic") {
+                fl_cars.push(car)
             }
         })
         return JSON.parse(JSON.stringify(fl_cars))
-    }else{
+    } else {
         return cars;
     }
 }
 
-function filter_by_fuelpipe(cars){
-    let id = localStorage['fbf_method_id'] ;
+function filter_by_fuelpipe(cars) {
+    let id = localStorage['fbf_method_id'];
     let fl_cars = []
-    if(id == "fbf_petrol"){
-        cars.forEach((car)=>{
-            if(car.fuel_Type.toLowerCase().replace(/\s/g, "")=="petrol"){
-                fl_cars.push(car) 
+    if (id == "fbf_petrol") {
+        cars.forEach((car) => {
+            if (car.fuel_Type.toLowerCase().replace(/\s/g, "") == "petrol") {
+                fl_cars.push(car)
             }
         })
         return JSON.parse(JSON.stringify(fl_cars))
 
-    }else if(id== "fbf_diesel"){
-        cars.forEach((car)=>{
-            if(car.fuel_Type.toLowerCase().replace(/\s/g, "")=="diesel"){
-                fl_cars.push(car) 
+    } else if (id == "fbf_diesel") {
+        cars.forEach((car) => {
+            if (car.fuel_Type.toLowerCase().replace(/\s/g, "") == "diesel") {
+                fl_cars.push(car)
             }
         })
         return JSON.parse(JSON.stringify(fl_cars))
-    }else{
+    } else {
         return cars;
     }
 }
 
-function filter_by_style_pipe(cars){
-    let id = localStorage['fbs_method_id'] ;
+function filter_by_style_pipe(cars) {
+    let id = localStorage['fbs_method_id'];
     let fl_cars = []
-    if(id == "fbs_hatch"){
-        cars.forEach((car)=>{
-            if(car.car_Type.toLowerCase().replace(/\s/g, "")=="hatchback"){
-                fl_cars.push(car) 
+    if (id == "fbs_hatch") {
+        cars.forEach((car) => {
+            if (car.car_Type.toLowerCase().replace(/\s/g, "") == "hatchback") {
+                fl_cars.push(car)
             }
         })
         return JSON.parse(JSON.stringify(fl_cars))
 
-    }else if(id== "fbs_sedan"){
-        cars.forEach((car)=>{
-            if(car.car_Type.toLowerCase().replace(/\s/g, "")=="sedan"){
-                fl_cars.push(car) 
+    } else if (id == "fbs_sedan") {
+        cars.forEach((car) => {
+            if (car.car_Type.toLowerCase().replace(/\s/g, "") == "sedan") {
+                fl_cars.push(car)
             }
         })
         return JSON.parse(JSON.stringify(fl_cars))
-    }else if(id== "fbs_suv"){
-        cars.forEach((car)=>{
-            if(car.car_Type.toLowerCase().replace(/\s/g, "")=="suv"){
-                fl_cars.push(car) 
+    } else if (id == "fbs_suv") {
+        cars.forEach((car) => {
+            if (car.car_Type.toLowerCase().replace(/\s/g, "") == "suv") {
+                fl_cars.push(car)
             }
         })
         return JSON.parse(JSON.stringify(fl_cars))
-    }else if(id== "fbs_mini_suv"){
-        cars.forEach((car)=>{
-            if(car.car_Type.toLowerCase().replace(/\s/g, "")=="minisuv"){
-                fl_cars.push(car) 
+    } else if (id == "fbs_mini_suv") {
+        cars.forEach((car) => {
+            if (car.car_Type.toLowerCase().replace(/\s/g, "") == "minisuv") {
+                fl_cars.push(car)
             }
         })
         return JSON.parse(JSON.stringify(fl_cars))
-    }else{
+    } else {
         return cars;
     }
 }
 
-function search_filter(){
+function search_filter() {
     //get the search word
     let search_query = document.getElementById("car_search_input").value;
-    localStorage['car_search_input']  = search_query;
+    localStorage['car_search_input'] = search_query;
 
-   // let err_div = document.getElementById("car_search_submit_error_div");
+    // let err_div = document.getElementById("car_search_submit_error_div");
     location.reload();
 }
 
-function searchFilterPipe(cars){
+function searchFilterPipe(cars) {
     let search_query = document.getElementById("car_search_input").value;
 
     let flt_cars = []
-    console.log("Searchig for ",search_query)
-    if(search_query == undefined || search_query == null || search_query =="" ||  search_query=="undefined"){
-       return cars;
-    }else{
-       //do the filtering
-       flt_cars = cars.filter((car)=>{
-           if(car.name.toLowerCase().includes(search_query.toLowerCase()) ||
-           search_query.toLowerCase().includes(car.name.toLowerCase()) ||
-           car.car_Type.toLowerCase().includes(search_query.toLowerCase()||
-           search_query.toLowerCase().includes(car.car_Type.toLowerCase()))){
-               return true;
-           }
-       })
+    console.log("Searchig for ", search_query)
+    if (search_query == undefined || search_query == null || search_query == "" || search_query == "undefined") {
+        return cars;
+    } else {
+        //do the filtering
+        flt_cars = cars.filter((car) => {
+            if (car.name.toLowerCase().includes(search_query.toLowerCase()) ||
+                search_query.toLowerCase().includes(car.name.toLowerCase()) ||
+                car.car_Type.toLowerCase().includes(search_query.toLowerCase() ||
+                    search_query.toLowerCase().includes(car.car_Type.toLowerCase()))) {
+                return true;
+            }
+        })
     }
 
     return flt_cars;
+}
+
+function create_pagination(cars) {
+    //get ul reference
+    let ul_pagination = document.getElementById("car_pagination_ul");
+    let number_of_item_per_page = 6;
+
+    //clear existing childern
+    while (ul_pagination.firstChild) {
+        ul_pagination.removeChild(ul_pagination.firstChild);
+    }
+
+    //check number of cars
+    let err_div = document.getElementById("car_content_error_div");
+    let lngth_cars = 0;
+    if (cars == null || cars == undefined || cars.length == 0) {
+        lngth_cars = 0;
+        //display ooops!!
+        err_div.innerHTML = "Ooops!! No rides found!"
+        err_div.style.visibility = "visible"
+        return cars;
+    } else {
+        err_div.style.visibility = "hidden"
+        lngth_cars = cars.length;
+
+        //check number pages
+        let whole_page = lngth_cars / number_of_item_per_page;
+
+        if (whole_page != Math.floor(whole_page)) {
+            whole_page = Math.floor(whole_page) + 1;
+        }
+
+        console.log("WHole pages ", whole_page)
+
+        //last page from storage
+        let last_page_from_storage = localStorage['last_page_number'];
+
+        if (last_page_from_storage == "" || last_page_from_storage == "undefined" || last_page_from_storage == undefined ||
+            last_page_from_storage == null) {
+            last_page_from_storage = 1;
+        }
+
+        if (last_page_from_storage > whole_page) {
+            last_page_from_storage = 1;
+        }
+
+        //add previous button to paginationmenu
+        var li_div = document.createElement('li');
+        li_div.className = "page-item";
+        li_div.onclick = function () { on_pagination_element_click(-2, whole_page) };
+        //link
+        var a_div = document.createElement('a');
+        a_div.className = "page-link";
+        a_div.href = "#"
+        a_div.innerHTML = "Previous";
+        li_div.appendChild(a_div);
+        ul_pagination.appendChild(li_div);
+
+        for (let i = 0; i < whole_page; i++) {
+            //add page numbers in pagination element
+            var li_div = document.createElement('li');
+            if ((last_page_from_storage - 1) == i) {
+                li_div.className = "page-item active";
+            } else {
+                li_div.className = "page-item";
+            }
+            li_div.onclick = function () { on_pagination_element_click(i + 1, whole_page) };
+            //link
+            var a_div = document.createElement('a');
+            a_div.className = "page-link";
+            a_div.href = "#"
+            a_div.innerHTML = i + 1;
+            li_div.appendChild(a_div);
+            ul_pagination.appendChild(li_div);
+        }
+
+
+        //add next button to paginationmenu
+        var li_div = document.createElement('li');
+        li_div.className = "page-item";
+        li_div.onclick = function () { on_pagination_element_click(-1, whole_page) };
+        //link
+        var a_div = document.createElement('a');
+        a_div.className = "page-link";
+        a_div.href = "#"
+        a_div.innerHTML = "Next";
+        li_div.appendChild(a_div);
+        ul_pagination.appendChild(li_div);
+
+        //paginate cars
+        var start = (last_page_from_storage-1 )* number_of_item_per_page;
+        var end = start+ number_of_item_per_page
+        console.log("Pagination Start",start,"end",end)
+        var pg_cars = cars.slice(start, end);
+        console.log("Paginatd cars", pg_cars)
+        return pg_cars;
+    }
+}
+
+function on_pagination_element_click(page_number, maxpage) {
+    let last_page_from_storage = localStorage['last_page_number'];
+
+    if (last_page_from_storage == "" || last_page_from_storage == "undefined" || last_page_from_storage == undefined ||
+        last_page_from_storage == null) {
+        last_page_from_storage = 1;
+    }
+
+    if (last_page_from_storage > maxpage) {
+        last_page_from_storage = 1;
+    }
+
+    if (page_number == -2) {
+
+        if (last_page_from_storage != 1) {
+            last_page_from_storage--;
+        } else {
+            last_page_from_storage = 1;
+        }
+
+        set_last_page_number_to_storage(last_page_from_storage)
+        console.log("pagination element previous")
+    } else if (page_number == -1) {
+        if (last_page_from_storage < maxpage) {
+            last_page_from_storage++;
+        } else {
+            last_page_from_storage = maxpage;
+        }
+
+        set_last_page_number_to_storage(last_page_from_storage)
+        console.log("pagination element next")
+    } else {
+        set_last_page_number_to_storage(page_number)
+        console.log("pagination element click", page_number)
+    }
+
+    location.reload()
 }
 
