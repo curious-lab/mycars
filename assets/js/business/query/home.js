@@ -3,7 +3,7 @@
 function home_on_submit() {
     //get cars
     let all_cars = sc_get_cars();
-    console.log(all_cars)
+    console.log(all_cars);
     //get the submit form by id
     let el_location = document.getElementById("home_location_select").value;
     let el_date = document.getElementById("home_startDate2").value;

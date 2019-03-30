@@ -5,7 +5,7 @@
 function sc_get_cars() {
 
   //make http call to cars end point
-  let api_end_point = "https://api.sheety.co/311576ae-321a-43e3-9a5b-61b3ac373d85"
+  let api_end_point = "https://api.sheety.co/311576ae-321a-43e3-9a5b-61b3ac373d85";
 
   var xmlHttp = new XMLHttpRequest();
   xmlHttp.open("GET", api_end_point, false); // false for synchronous request
