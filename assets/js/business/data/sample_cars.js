@@ -11,11 +11,11 @@ function sc_get_cars() {
   xmlHttp.open("GET", api_end_point, false); // false for synchronous request
   xmlHttp.send(null);
   
-  console.log(xmlHttp.responseText)
+  //console.log(xmlHttp.responseText)
   if(xmlHttp.responseText != null && xmlHttp.responseText != undefined){
     try{
       let json_data = JSON.parse(xmlHttp.responseText)
-      return cars;
+      return json_data;
     }catch(e){
       console.log("error in parsing cars ",e)
       return[]
