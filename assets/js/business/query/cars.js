@@ -153,6 +153,7 @@ function display_car(car) {
     //create car card
     var car_card = document.createElement('div');
     car_card.className = "single-car-wrap";
+    car_card.id = "card_select"+car.name;
 
     //card row
     var card_row = document.createElement('div');
@@ -226,16 +227,73 @@ function display_car(car) {
     cr_inf.appendChild(div_fare)
     cr_inf.appendChild(ul_misc)
     cr_inf.appendChild(car_location);
+    //select button
+    //     <p class="rating" style="color: black">
+    //     <input type="" name="vehicle1" value="Bike" style="" disabled>Add to Cart
+    // </p>
+    //select button outer div
+    var p_rat = document.createElement('p');
+    p_rat.className = "rating"
+    p_rat.style.color = "black"
+    //select button input
+    var select_input = document.createElement('input');
+    select_input.className = "rating"
+    select_input.type = "checkbox"
+    select_input.id = "cb_select"+car.name
+    select_input.style.color = "margin-right: 4px;"
+    select_input.onclick = function(){
+        on_car_selected("cb_select"+car.name,"card_select"+car.name )
+    }
+    
+    //check if car available
+    if (car.is_available == false) {
+        select_input.disabled = true
+    }
+    p_rat.appendChild(select_input)
+
+    //select text
+    var p_select = document.createElement('p');
+    p_select.className = ""
+    p_select.style.color = "black"
+    p_select.style.paddingTop = "24px";
+    p_select.innerHTML = "Select"
+
+     //check if car available
+     if (car.is_available == false) {
+        p_select.style.color = "grey"
+    }
+
+    p_rat.appendChild(p_select);
+
+    cr_inf.appendChild(p_rat)
+
+
     //check if car available
     if (car.is_available == false) {
         cr_inf.appendChild(p_avl)
     }
+
     cr_inf_dis_tbl_cell.appendChild(cr_inf);
     cr_inf_dis_tbl.appendChild(cr_inf_dis_tbl_cell);
     cr_inf_col.appendChild(cr_inf_dis_tbl)
     card_row.appendChild(cr_inf_col)
 
     root_element.appendChild(car_card)
+}
+
+//on the car selected 
+function on_car_selected(check_box_id,car_card_id){
+ // Get the checkbox
+ var checkBox = document.getElementById(check_box_id);
+ // Get the card
+ var card = document.getElementById(car_card_id);
+
+ // If the checkbox is checked, display the output text
+ if (checkBox.checked == true){
+   card.style.background = "#FFFFE0";
+ } else {
+    card.style.background = "white";
+ }
 }
 
 
@@ -585,9 +643,9 @@ function create_pagination(cars) {
         ul_pagination.appendChild(li_div);
 
         //paginate cars
-        var start = (last_page_from_storage-1 )* number_of_item_per_page;
-        var end = start+ number_of_item_per_page
-        console.log("Pagination Start",start,"end",end)
+        var start = (last_page_from_storage - 1) * number_of_item_per_page;
+        var end = start + number_of_item_per_page
+        console.log("Pagination Start", start, "end", end)
         var pg_cars = cars.slice(start, end);
         console.log("Paginatd cars", pg_cars)
         return pg_cars;
@@ -636,7 +694,7 @@ function on_pagination_element_click(page_number, maxpage) {
 
 
 /**********************Clear al filters***********************/
-function clear_all_filter(){
+function clear_all_filter() {
     clear_sbp_option_from_storage()
     clear_fbt_option_from_storage()
     clear_fbf_option_from_storage()
@@ -646,23 +704,23 @@ function clear_all_filter(){
 }
 
 function clear_sbp_option_from_storage() {
-    localStorage['sbp_method_id']=""
+    localStorage['sbp_method_id'] = ""
 }
 
 function clear_fbt_option_from_storage() {
-     localStorage['fbt_method_id']=""
+    localStorage['fbt_method_id'] = ""
 }
 function clear_fbf_option_from_storage() {
-    localStorage['fbf_method_id']=""
+    localStorage['fbf_method_id'] = ""
 
 }
 
 function clear_fbs_option_from_storage() {
-    localStorage['fbs_method_id']=""
+    localStorage['fbs_method_id'] = ""
 }
 
 function clear_search_query_from_storage() {
-    localStorage['car_search_input']=""
+    localStorage['car_search_input'] = ""
 }
 /**************************************************************/
 
