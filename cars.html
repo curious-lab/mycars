@@ -145,9 +145,11 @@
 
                         <div class="newsletter-area" style="margin-bottom: 30px; margin-top: 0px;">
                             <form action="#">
-                                <input type="email" placeholder="Search" style="color:black">
-                                <button type="submit" class="newsletter-btn"><i class="fa fa-search"></i></button>
+                                <input id="car_search_input" type="text" placeholder="Search" style="color:black">
+                                <button onclick="search_filter()" class="newsletter-btn"><i class="fa fa-search"></i></button>
                             </form>
+                             <!-- Error display section-->
+                             <p id="car_search_submit_error_div" class="alert" style="color:red" role="alert" style="visibility:hidden"></p>
                         </div>
 
 

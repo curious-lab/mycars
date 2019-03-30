@@ -3,11 +3,14 @@
  * init home on the page load
  */
 $(document).ready(function () {
+    set_search_query_from_storage();
+
     let cars = get_the_location_and_day();
     sort_by_price_pipe(cars);
     cars = filter_by_transimission_pipe(cars)
     cars = filter_by_fuelpipe(cars);
     cars = filter_by_style_pipe(cars)
+    cars = searchFilterPipe(cars)
     displayAllCars(cars);
 
     car_set_select_locations();
@@ -304,21 +307,36 @@ function onSortByPrice(id) {
 
 function set_sbp_option_from_storage() {
     let id = localStorage['sbp_method_id']
-    document.getElementById(id).className = "nav-link active"
+    if(id !=""){
+        document.getElementById(id).className = "nav-link active"
+    }
 }
 
 function set_fbt_option_from_storage() {
     let id = localStorage['fbt_method_id']
-    document.getElementById(id).className = "nav-link active"
+    if(id != ""){
+        document.getElementById(id).className = "nav-link active"
+    }
 }
 function set_fbf_option_from_storage() {
     let id = localStorage['fbf_method_id']
-    document.getElementById(id).className = "nav-link active"
+    if(id != ""){
+        document.getElementById(id).className = "nav-link active"
+    }
 }
 
 function set_fbs_option_from_storage() {
     let id = localStorage['fbs_method_id']
-    document.getElementById(id).className = "nav-link active"
+    if(id != ""){
+        document.getElementById(id).className = "nav-link active"
+    }
+}
+
+function set_search_query_from_storage() {
+    let query = localStorage['car_search_input']
+    if(query != undefined && query !=null && query != "" && query!="undefined"){
+        document.getElementById('car_search_input').value = query
+    }
 }
 
 function onFilterByTransmission(id){
@@ -444,5 +462,36 @@ function filter_by_style_pipe(cars){
     }else{
         return cars;
     }
+}
+
+function search_filter(){
+    //get the search word
+    let search_query = document.getElementById("car_search_input").value;
+    localStorage['car_search_input']  = search_query;
+
+   // let err_div = document.getElementById("car_search_submit_error_div");
+    location.reload();
+}
+
+function searchFilterPipe(cars){
+    let search_query = document.getElementById("car_search_input").value;
+
+    let flt_cars = []
+    console.log("Searchig for ",search_query)
+    if(search_query == undefined || search_query == null || search_query =="" ||  search_query=="undefined"){
+       return cars;
+    }else{
+       //do the filtering
+       flt_cars = cars.filter((car)=>{
+           if(car.name.toLowerCase().includes(search_query.toLowerCase()) ||
+           search_query.toLowerCase().includes(car.name.toLowerCase()) ||
+           car.car_Type.toLowerCase().includes(search_query.toLowerCase()||
+           search_query.toLowerCase().includes(car.car_Type.toLowerCase()))){
+               return true;
+           }
+       })
+    }
+
+    return flt_cars;
 }
 
