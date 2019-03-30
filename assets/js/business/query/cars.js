@@ -34,7 +34,7 @@ function car_set_select_locations() {
     document.getElementById("car_location_select").selectedIndex = localStorage["home_selected_location_index"];
 }
 
-
+//get the location and the dy from cache which is passed by home or modify search option
 function get_the_location_and_day() {
     //location and day received in cars.html
     let str_location = localStorage["home_selected_location"];
@@ -144,7 +144,7 @@ function clear_all_cars() {
 }
 
 /**
- * This method is used to display the cars in the car.html page
+ * This method is used to display the car in the car.html page
  */
 function display_car(car) {
     //get the root reference
@@ -217,6 +217,13 @@ function display_car(car) {
     loc_marker.style = "margin-right:5px; color: #ffd000;"
     car_location.appendChild(loc_marker)
 
+    //book now
+   // <a href="#" class="rent-btn">Book Now</a> 
+    var book_now = document.createElement('a');
+    book_now.className = "rent-btn"
+    book_now.href = "#"
+    book_now.innerHTML = "Book Now"
+
     //availability
     var p_avl = document.createElement('p');
     p_avl.className = "rent-btn not-active"
@@ -227,6 +234,10 @@ function display_car(car) {
     cr_inf.appendChild(div_fare)
     cr_inf.appendChild(ul_misc)
     cr_inf.appendChild(car_location);
+    if(car.is_available != false){
+        cr_inf.appendChild(book_now)
+    }
+    
     //select button
     //     <p class="rating" style="color: black">
     //     <input type="" name="vehicle1" value="Bike" style="" disabled>Add to Cart
@@ -281,7 +292,7 @@ function display_car(car) {
     root_element.appendChild(car_card)
 }
 
-//on the car selected 
+//on the car selected change the card back groud to pale yellow
 function on_car_selected(check_box_id,car_card_id){
  // Get the checkbox
  var checkBox = document.getElementById(check_box_id);
@@ -360,7 +371,7 @@ function onSortByPrice(id) {
     location.reload();
 }
 
-
+// set  sort by price by cache
 function set_sbp_option_from_storage() {
     let id = localStorage['sbp_method_id']
     if (id != "") {
@@ -368,12 +379,15 @@ function set_sbp_option_from_storage() {
     }
 }
 
+// set  filter by transmission by cache
 function set_fbt_option_from_storage() {
     let id = localStorage['fbt_method_id']
     if (id != "") {
         document.getElementById(id).className = "nav-link active"
     }
 }
+
+// set  filter by fuel type by cache
 function set_fbf_option_from_storage() {
     let id = localStorage['fbf_method_id']
     if (id != "") {
@@ -381,6 +395,7 @@ function set_fbf_option_from_storage() {
     }
 }
 
+// set  filter by vehicle type by cache
 function set_fbs_option_from_storage() {
     let id = localStorage['fbs_method_id']
     if (id != "") {
@@ -388,6 +403,7 @@ function set_fbs_option_from_storage() {
     }
 }
 
+// set  seach query form cache
 function set_search_query_from_storage() {
     let query = localStorage['car_search_input']
     if (query != undefined && query != null && query != "" && query != "undefined") {
@@ -395,28 +411,33 @@ function set_search_query_from_storage() {
     }
 }
 
+// set  last page form cache
 function set_last_page_number_to_storage(page) {
     localStorage['last_page_number'] = page
 }
 
+// On filter by transmission clicked
 function onFilterByTransmission(id) {
     console.log("filer by trnsimssion method id ", id)
     localStorage['fbt_method_id'] = id;
     location.reload()
 }
 
+// On filter by fuel clicked
 function onFilterByFuel(id) {
     console.log("filer by Fuel method id ", id)
     localStorage['fbf_method_id'] = id;
     location.reload()
 }
 
+// On filter by vehicle type clicked
 function onFilterByStyle(id) {
     console.log("filer by style method id ", id)
     localStorage['fbs_method_id'] = id;
     location.reload()
 }
 
+// sort by price pipe
 function sort_by_price_pipe(cars) {
     let id = localStorage['sbp_method_id'];
     if (id == "sbp_lowhigh") {
@@ -441,6 +462,7 @@ function sort_by_price_pipe(cars) {
     }
 }
 
+// filter  by trasnmission pipe
 function filter_by_transimission_pipe(cars) {
     let id = localStorage['fbt_method_id'];
     let fl_cars = []
@@ -464,6 +486,7 @@ function filter_by_transimission_pipe(cars) {
     }
 }
 
+// filter  by fuel pipe
 function filter_by_fuelpipe(cars) {
     let id = localStorage['fbf_method_id'];
     let fl_cars = []
@@ -487,6 +510,7 @@ function filter_by_fuelpipe(cars) {
     }
 }
 
+// filter  by vehicle type pipe
 function filter_by_style_pipe(cars) {
     let id = localStorage['fbs_method_id'];
     let fl_cars = []
@@ -524,6 +548,7 @@ function filter_by_style_pipe(cars) {
     }
 }
 
+//on the search button clicked
 function search_filter() {
     //get the search word
     let search_query = document.getElementById("car_search_input").value;
@@ -533,6 +558,7 @@ function search_filter() {
     location.reload();
 }
 
+// filter  by search pipe
 function searchFilterPipe(cars) {
     let search_query = document.getElementById("car_search_input").value;
 
@@ -555,6 +581,7 @@ function searchFilterPipe(cars) {
     return flt_cars;
 }
 
+//create the pagnation
 function create_pagination(cars) {
     //get ul reference
     let ul_pagination = document.getElementById("car_pagination_ul");
@@ -652,6 +679,7 @@ function create_pagination(cars) {
     }
 }
 
+//on pagination click
 function on_pagination_element_click(page_number, maxpage) {
     let last_page_from_storage = localStorage['last_page_number'];
 

@@ -51,8 +51,6 @@ function home_on_submit() {
     }
 }
 
-
-
 /**
  * Load the drop down with locations
  */
@@ -63,8 +61,6 @@ function home_set_select_locations() {
         select.options[select.options.length] = new Option(locations[index], index);
     }
 }
-
-
 
 /**
  * init home on the page load
@@ -80,7 +76,7 @@ $(document).ready(function () {
     clear_search_query_from_storage()
 });
 
-
+/*************** Clear the cache ***************/
 function clear_sbp_option_from_storage() {
     localStorage['sbp_method_id']=""
 }
@@ -104,3 +100,5 @@ function clear_search_query_from_storage() {
 function clear_last_page_number_from_storage() {
     localStorage['last_page_number']="";
 }
+
+/*************************************************/
